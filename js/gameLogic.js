@@ -24,12 +24,25 @@
 
 /**
  * Board level function. Needs access to
- * 1. Turn (W or B)
- * 2. Board matrix
  * - Find king of current turn, check for
  * - For each opponent piece, is king’s square a valid move()?
- * @param {Move} move
  * @param {Board} board
  * @param {Turn} turn
+ * @returns {boolean}
  */
-let isCheck = (move, board, turn) => {};
+function isCheck(board, turn) {
+  //for a board state, check that king of current turn is not checked
+  //Step 1: find king's position
+  const king = turn === "B" ? "k" : "K";
+  const kingCoordinate = getPieceCoordinate(board, king);
+}
+
+/**
+ * Board level function. Needs access to
+ * @param {Board} board
+ * @param {Piece} piece
+ * @returns {Coordinate}
+ */
+function getPieceCoordinate(board, piece) {
+  return { x: 0, y: 0 }; //todo: implement
+}
