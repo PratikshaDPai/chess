@@ -79,7 +79,7 @@ function getOpponentTurn(turn) {
  * @returns {boolean}
  */
 function isValidMove(board, src, dest, turn) {
-  return true;
+  return true; //todo: implement
 }
 
 /**
