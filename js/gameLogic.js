@@ -26,6 +26,7 @@
  * Board level function. Needs access to
  * - Find king of current turn, check for
  * - For each opponent piece, is king’s square a valid move()?
+ * - board is assumed to be in a valid state, passing an invalid board is out of scope
  * @param {Board} board
  * @param {Turn} turn
  * @returns {boolean}
@@ -57,6 +58,8 @@ function isCheck(board, turn) {
       }
     }
   }
+
+  return false;
 }
 
 /**
