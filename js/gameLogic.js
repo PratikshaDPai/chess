@@ -86,8 +86,15 @@ function isValidMove(board, src, dest, turn) {
  * Board level function. Needs access to
  * @param {Board} board
  * @param {Piece} piece
- * @returns {Coordinate}
+ * @returns {Coordinate|undefined}
  */
-function getPieceCoordinate(board, piece) {
-  return { x: 0, y: 0 }; //todo: implement
+export function getPieceCoordinate(board, piece) {
+  for (let x = 0; x < board.length; x++) {
+    for (let y = 0; y < board.length; y++) {
+      if (board[x][y] === piece) {
+        return { x, y };
+      }
+    }
+  }
+  return undefined;
 }
