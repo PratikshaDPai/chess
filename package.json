@@ -1,0 +1,19 @@
+{
+  "name": "ga-chess",
+  "version": "1.0.0",
+  "description": "chess game",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PratikshaDPai/chess.git"
+  },
+  "author": "Pratiksha Pai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PratikshaDPai/chess/issues"
+  },
+  "homepage": "https://github.com/PratikshaDPai/chess#readme"
+}
