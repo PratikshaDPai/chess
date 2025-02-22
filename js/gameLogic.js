@@ -92,7 +92,7 @@ export function getPieceTurn(piece) {
  * @param {Turn} turn
  * @returns {boolean}
  */
-function isValidMove(board, src, dest, turn) {
+export function isValidMove(board, src, dest, turn) {
   const srcPiece = board[src.x][src.y];
   const destPiece = board[dest.x][dest.y];
   //check if piece color matches turn

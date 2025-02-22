@@ -1,5 +1,10 @@
 import { jest, describe, test, expect } from "@jest/globals";
-import { getOpponentTurn, getPieceCoordinate, getPieceTurn } from "./gameLogic";
+import {
+  getOpponentTurn,
+  getPieceCoordinate,
+  getPieceTurn,
+  isValidMove,
+} from "./gameLogic";
 
 describe("getOpponentTurn() Tests", () => {
   test("Pass B, get W", () => {
@@ -54,5 +59,28 @@ describe("getPieceTurn() tests", () => {
 
   test("Pass '.' get undefined", () => {
     expect(getPieceTurn(".")).toBeUndefined();
+  });
+});
+
+describe("isValidMove() tests", () => {
+  test("Move piece to attack same color, get false", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", "b", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", "k", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    expect(
+      isValidMove(
+        board,
+        getPieceCoordinate(board, "b"),
+        getPieceCoordinate(board, "k"),
+        "B"
+      )
+    ).toBe(false);
   });
 });
