@@ -149,6 +149,43 @@ describe("isPathClear() Tests", () => {
       )
     ).toBe(true);
   });
-  test("if path not clear, expect false", () => {});
-  test("if path clear, expect true", () => {});
+
+  test("if path not clear, expect false", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", "b", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", "k", ".", ".", "."],
+      [".", ".", ".", ".", ".", "Q", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    expect(
+      isPathClear(
+        board,
+        getPieceCoordinate(board, "b"),
+        getPieceCoordinate(board, "Q")
+      )
+    ).toBe(false);
+  });
+  test("if path clear, expect true", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", "b", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", "k", ".", ".", "."],
+      [".", ".", ".", ".", ".", "Q", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    expect(
+      isPathClear(
+        board,
+        getPieceCoordinate(board, "b"),
+        getPieceCoordinate(board, "k")
+      )
+    ).toBe(true);
+  });
 });
