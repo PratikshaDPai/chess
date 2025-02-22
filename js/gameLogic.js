@@ -66,7 +66,7 @@ function isCheck(board, turn) {
  * @param {Turn} turn
  * @returns {Turn}
  */
-function getOpponentTurn(turn) {
+export function getOpponentTurn(turn) {
   return turn === "B" ? "W" : "B";
 }
 
