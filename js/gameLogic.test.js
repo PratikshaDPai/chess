@@ -83,4 +83,47 @@ describe("isValidMove() tests", () => {
       )
     ).toBe(false);
   });
+
+  test("Move empty src square return false", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", "b", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", "k", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    expect(
+      isValidMove(
+        board,
+        getPieceCoordinate(board, "."),
+        getPieceCoordinate(board, "k"),
+        "B"
+      )
+    ).toBe(false);
+  });
+
+  test("Move Black piece when turn is W, return false", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", "b", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", "k", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    expect(
+      isValidMove(
+        board,
+        getPieceCoordinate(board, "b"),
+        getPieceCoordinate(board, "k"),
+        "W"
+      )
+    ).toBe(false);
+  });
+  //todo: move to empty dest square
 });
