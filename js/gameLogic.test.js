@@ -3,6 +3,7 @@ import {
   getOpponentTurn,
   getPieceCoordinate,
   getPieceTurn,
+  isPathClear,
   isValidMove,
 } from "./gameLogic";
 
@@ -126,4 +127,28 @@ describe("isValidMove() tests", () => {
     ).toBe(false);
   });
   //todo: move to empty dest square
+});
+
+describe("isPathClear() Tests", () => {
+  test("Pass src===dest, expect true", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", "b", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", "k", ".", ".", "."],
+      [".", ".", ".", ".", ".", "Q", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    expect(
+      isPathClear(
+        board,
+        getPieceCoordinate(board, "b"),
+        getPieceCoordinate(board, "b")
+      )
+    ).toBe(true);
+  });
+  test("if path not clear, expect false", () => {});
+  test("if path clear, expect true", () => {});
 });

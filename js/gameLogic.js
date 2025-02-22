@@ -139,7 +139,10 @@ export function isValidMove(board, src, dest, turn) {
  * @param {Coordinate} dest
  * @returns {boolean}
  */
-function isPathClear(board, src, dest) {
+export function isPathClear(board, src, dest) {
+  //if src=dest return true
+  if (src.x === dest.x && src.y === dest.y) return true;
+
   //possible moves: dx === 0 || dy === 0 || Math.abs(dx) === Math.abs(dy)
   const xdisp = dest.x - src.x;
   const ydisp = dest.y - src.y;
