@@ -134,6 +134,7 @@ export function isValidMove(board, src, dest, turn) {
 
 /**
  * Check if path is clear from Source Square to Target
+ * If path is not valid, returns false
  * @param {Board} board
  * @param {Coordinate} src
  * @param {Coordinate} dest
@@ -142,14 +143,16 @@ export function isValidMove(board, src, dest, turn) {
 export function isPathClear(board, src, dest) {
   //if src=dest return true
   if (src.x === dest.x && src.y === dest.y) return true;
-
-  //possible moves: dx === 0 || dy === 0 || Math.abs(dx) === Math.abs(dy)
   const xdisp = dest.x - src.x;
   const ydisp = dest.y - src.y;
   //goal to move x to x+xdisp and y to y+ydisp in increments of dx,dy
   //get direction vector
   const dx = xdisp !== 0 ? xdisp / Math.abs(xdisp) : 0;
   const dy = ydisp !== 0 ? ydisp / Math.abs(ydisp) : 0;
+  //possible moves: dx === 0 || dy === 0 || Math.abs(dx) === Math.abs(dy)
+  if (dx !== 0 && dy !== 0 && Math.abs(dx) !== Math.abs(dy)) {
+    return false;
+  }
   let x = src.x + dx;
   let y = src.y + dy;
   while (x !== dest.x || y !== dest.y) {
