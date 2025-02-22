@@ -102,6 +102,44 @@ export function isValidMove(board, src, dest, turn) {
     return false;
   }
 
+  switch (srcPiece.toLowerCase()) {
+    case "p": {
+      break;
+    }
+    case "r": {
+      return (dx === 0 || dy === 0) && isPathClear(board, src, dest);
+    }
+    case "b": {
+      return Math.abs(dx) === Math.abs(dy) && isPathClear(board, src, dest);
+    }
+    case "q": {
+      return (
+        (dx === 0 || dy === 0 || Math.abs(dx) === Math.abs(dy)) &&
+        isPathClear(board, src, dest)
+      );
+    }
+    case "k": {
+      return Math.abs(dx) <= 1 && Math.abs(dy) <= 1;
+    }
+    case "n": {
+      return (
+        (Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
+        (Math.abs(dx) === 1 && Math.abs(dy) === 2)
+      );
+    }
+  }
+
+  return false;
+}
+
+/**
+ * Check if path is clear from Source Square to Target
+ * @param {Board} board
+ * @param {Coordinate} src
+ * @param {Coordinate} dest
+ * @returns {boolean}
+ */
+function isPathClear(board, src, dest) {
   return true; //todo: implement
 }
 
