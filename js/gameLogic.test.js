@@ -1,5 +1,5 @@
 import { jest, describe, test, expect } from "@jest/globals";
-import { getOpponentTurn, getPieceCoordinate } from "./gameLogic";
+import { getOpponentTurn, getPieceCoordinate, getPieceTurn } from "./gameLogic";
 
 describe("getOpponentTurn() Tests", () => {
   test("Pass B, get W", () => {
@@ -40,5 +40,15 @@ describe("getPieceCoordinate() tests", () => {
     ];
 
     expect(getPieceCoordinate(board, "k")).toBeUndefined();
+  });
+});
+
+describe("getPieceTurn() tests", () => {
+  test("Pass 'k' get 'B'", () => {
+    expect(getPieceTurn("k")).toBe("B");
+  });
+
+  test("Pass 'K' get 'W'", () => {
+    expect(getPieceTurn("K")).toBe("W");
   });
 });

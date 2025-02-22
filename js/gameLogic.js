@@ -71,6 +71,14 @@ export function getOpponentTurn(turn) {
 }
 
 /**
+ * @param {Piece} piece
+ * @returns {Turn}
+ */
+export function getPieceTurn(piece) {
+  if (piece === piece.toLowerCase()) return "B";
+  return "W";
+}
+/**
  *
  * @param {Board} board
  * @param {Coordinate} src
@@ -79,6 +87,13 @@ export function getOpponentTurn(turn) {
  * @returns {boolean}
  */
 function isValidMove(board, src, dest, turn) {
+  const piece = board[src.x][src.y];
+  //check if piece color matches turn
+  //'B' turn=lowercase pieces, 'W' turn= uppercase
+  if (getPieceTurn(piece !== turn)) {
+    return false;
+  }
+
   return true; //todo: implement
 }
 
