@@ -140,7 +140,21 @@ export function isValidMove(board, src, dest, turn) {
  * @returns {boolean}
  */
 function isPathClear(board, src, dest) {
-  return true; //todo: implement
+  //possible moves: dx === 0 || dy === 0 || Math.abs(dx) === Math.abs(dy)
+  const xdisp = dest.x - src.x;
+  const ydisp = dest.y - src.y;
+  //goal to move x to x+xdisp and y to y+ydisp in increments of dx,dy
+  //get direction vector
+  const dx = xdisp !== 0 ? xdisp / Math.abs(xdisp) : 0;
+  const dy = ydisp !== 0 ? ydisp / Math.abs(ydisp) : 0;
+  let x = src.x + dx;
+  let y = src.y + dy;
+  while (x !== dest.x || y !== dest.y) {
+    if (board[x][y] !== ".") return false;
+    x += dx;
+    y += dy;
+  }
+  return true;
 }
 
 /**
