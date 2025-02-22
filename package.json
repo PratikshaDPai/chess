@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/PratikshaDPai/chess/issues"
   },
-  "homepage": "https://github.com/PratikshaDPai/chess#readme"
+  "homepage": "https://github.com/PratikshaDPai/chess#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
