@@ -51,4 +51,8 @@ describe("getPieceTurn() tests", () => {
   test("Pass 'K' get 'W'", () => {
     expect(getPieceTurn("K")).toBe("W");
   });
+
+  test("Pass '.' get undefined", () => {
+    expect(getPieceTurn(".")).toBeUndefined();
+  });
 });

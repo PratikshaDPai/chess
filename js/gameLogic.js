@@ -1,10 +1,15 @@
 /**
- * @typedef {(Piece|'.')[][]} Board
+ * @typedef {BoardSquare[][]} Board
  */
 
 /**
  * @typedef { 'R' | 'N' | "B" | "Q" | "K" | "P" | 'r' | 'n' | 'b' | 'q' | 'k' | 'p' } Piece
  */
+
+/**
+ * @typedef {Piece|'.'} BoardSquare
+ */
+
 /**
  * @typedef {'B'|'W'} Turn
  */
@@ -71,10 +76,11 @@ export function getOpponentTurn(turn) {
 }
 
 /**
- * @param {Piece} piece
+ * @param {BoardSquare} piece
  * @returns {Turn}
  */
 export function getPieceTurn(piece) {
+  if (piece === ".") return undefined;
   if (piece === piece.toLowerCase()) return "B";
   return "W";
 }
@@ -87,10 +93,12 @@ export function getPieceTurn(piece) {
  * @returns {boolean}
  */
 function isValidMove(board, src, dest, turn) {
-  const piece = board[src.x][src.y];
+  const srcPiece = board[src.x][src.y];
+  const destPiece = board[dest.x][dest.y];
   //check if piece color matches turn
   //'B' turn=lowercase pieces, 'W' turn= uppercase
-  if (getPieceTurn(piece !== turn)) {
+  //also test if dest square occupied by same color piece
+  if (getPieceTurn(srcPiece) !== turn || getPieceTurn(destPiece) === turn) {
     return false;
   }
 
