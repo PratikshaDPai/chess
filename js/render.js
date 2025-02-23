@@ -39,15 +39,27 @@ function updateBoard() {
     const row = square.dataset.row;
     const col = square.dataset.col;
     const piece = boardMatrix[row][col];
-    if (piece === ".") {
-      square.innerText = "";
-    } else {
-      square.innerText = piece;
-    }
+    //todo: change to images
+    const emojis = {
+      ".": "",
+      P: "♙",
+      B: "♗",
+      R: "♖",
+      N: "♘",
+      K: "♔",
+      Q: "♕",
+      p: "♟️",
+      b: "♝",
+      r: "♜",
+      n: "♞",
+      k: "♚",
+      q: "♛",
+    };
+    square.innerText = emojis[piece];
   }
 }
 
-function renderBoard() {
+function createBoard() {
   board.innerHTML = "";
   for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 8; j++) {
@@ -55,12 +67,10 @@ function renderBoard() {
       square.classList.add("square", (i + j) % 2 === 0 ? "light" : "dark");
       square.dataset.row = i;
       square.dataset.col = j;
-      if (boardMatrix[i][j] !== ".") {
-        square.textContent = boardMatrix[i][j];
-      }
       board.appendChild(square);
     }
   }
+  updateBoard();
 }
 
-renderBoard();
+createBoard();
