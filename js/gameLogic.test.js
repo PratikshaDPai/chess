@@ -546,5 +546,8 @@ describe("isValidMove() tests", () => {
     expect(
       isValidMove(board, getPieceCoordinate(board, "k"), { x: 3, y: 4 }, "B")
     ).toBe(false);
+    expect(
+      isValidMove(board, getPieceCoordinate(board, "K"), { x: 3, y: 4 }, "W")
+    ).toBe(false);
   });
 });
