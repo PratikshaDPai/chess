@@ -101,7 +101,8 @@ export function isValidMove(board, src, dest, turn) {
   if (getPieceTurn(srcPiece) !== turn || getPieceTurn(destPiece) === turn) {
     return false;
   }
-
+  const dx = dest.x - src.x;
+  const dy = dest.y - src.y;
   switch (srcPiece.toLowerCase()) {
     case "p": {
       break;
