@@ -126,6 +126,27 @@ describe("isValidMove() tests", () => {
     ).toBe(false);
   });
 
+  test("Move piece to empty destination square, return true", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", "q", ".", "P", ".", ".", "."],
+      [".", ".", ".", ".", "k", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    expect(
+      isValidMove(
+        board,
+        getPieceCoordinate(board, "q"),
+        getPieceCoordinate(board, "."),
+        "B"
+      )
+    ).toBe(true);
+  });
+
   test("Move Rook Diagonally, return false", () => {
     const board = [
       [".", ".", ".", ".", ".", ".", ".", "."],
@@ -376,6 +397,4 @@ describe("isValidMove() tests", () => {
       )
     ).toBe(true);
   });
-
-  //todo: move to empty dest square
 });
