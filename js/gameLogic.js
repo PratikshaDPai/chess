@@ -160,6 +160,19 @@ export function isValidMove(board, src, dest, turn) {
 }
 
 /**
+ *
+ * @param {Board} board
+ * @param {Move} move
+ * @returns {Board}
+ */
+function makeMove(board, { src, dest }) {
+  const newBoard = board.map((row) => [...row]); //clone 2d array in JS
+  newBoard[dest.x][dest.y] = newBoard[src.x][src.y]; // Move piece
+  newBoard[src.x][src.y] = "."; // Empty old square
+  return newBoard;
+}
+
+/**
  * Check if path is clear from Source Square to Target
  * If path is not valid, returns false
  * @param {Board} board
