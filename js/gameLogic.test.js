@@ -147,6 +147,140 @@ describe("isValidMove() tests", () => {
     ).toBe(true);
   });
 
+  test("Move Pawn up by one square, return true", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", "P", ".", ".", ".", "."], // Pawn at (6,3)
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    const src = getPieceCoordinate(board, "P");
+    const dest = { x: 5, y: 3 }; // Move up one row
+    expect(isValidMove(board, src, dest, "W")).toBe(true);
+  });
+
+  test("Move Pawn up by 3 squares, return false", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", "P", ".", ".", ".", "."], // Pawn at (6,3)
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    const src = getPieceCoordinate(board, "P");
+    const dest = { x: 3, y: 3 }; // Attempt to move up 3
+    expect(isValidMove(board, src, dest, "W")).toBe(false);
+  });
+
+  test("Move Pawn diagonal by 1 position with enemy piece, return true", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", "p", ".", ".", ".", ".", "."], // Black pawn at (5,2)
+      [".", ".", ".", "P", ".", ".", ".", "."], // White pawn at (6,3)
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    expect(
+      isValidMove(
+        board,
+        getPieceCoordinate(board, "P"),
+        getPieceCoordinate(board, "p"),
+        "W"
+      )
+    ).toBe(true);
+  });
+
+  test("Move Pawn diagonal by 1 position with empty square, return false", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", "P", ".", ".", ".", "."], // Pawn at (6,3)
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    const src = getPieceCoordinate(board, "P");
+    const dest = { x: 5, y: 2 };
+    expect(isValidMove(board, src, dest, "W")).toBe(false);
+  });
+
+  test("Move Pawn backwards, return false", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", "P", ".", ".", ".", "."], // Pawn at (6,3)
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    const src = getPieceCoordinate(board, "P");
+    const dest = { x: 7, y: 3 }; // Move down
+    expect(isValidMove(board, src, dest, "W")).toBe(false);
+  });
+
+  test("Move Pawn up by 2 positions when in middle of board, return false", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", "P", ".", ".", ".", "."], // Pawn at (4,3)
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    const src = getPieceCoordinate(board, "P");
+    const dest = { x: 2, y: 3 };
+    expect(isValidMove(board, src, dest, "W")).toBe(false);
+  });
+
+  test("Move Pawn up by 2 positions when in start position with blocked path, return false", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", "p", ".", ".", ".", "."], // Black pawn blocking (5,3)
+      [".", ".", ".", "P", ".", ".", ".", "."], // White pawn at (6,3)
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    const src = getPieceCoordinate(board, "P");
+    // White wants to move from row 6 -> row 4, but row 5 is blocked
+    const dest = { x: 4, y: 3 };
+    expect(isValidMove(board, src, dest, "W")).toBe(false);
+  });
+
+  test("Move Pawn up by 2 positions when in start position with clear path, return true", () => {
+    const board = [
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", "P", ".", ".", ".", "."], // Pawn at (6,3)
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    const src = getPieceCoordinate(board, "P");
+    const dest = { x: 4, y: 3 };
+    expect(isValidMove(board, src, dest, "W")).toBe(true);
+  });
+
   test("Move Rook Diagonally, return false", () => {
     const board = [
       [".", ".", ".", ".", ".", ".", ".", "."],

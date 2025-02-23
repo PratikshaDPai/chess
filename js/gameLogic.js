@@ -105,7 +105,33 @@ export function isValidMove(board, src, dest, turn) {
   const dy = dest.y - src.y;
   switch (srcPiece.toLowerCase()) {
     case "p": {
-      break;
+      if (turn === "W") {
+        if (
+          src.x === 6 &&
+          dx === -2 &&
+          isPathClear(board, src, dest) &&
+          destPiece === "."
+        )
+          return true; //check for 2 pos move
+        return (
+          dx === -1 &&
+          ((dy === 0 && destPiece === ".") ||
+            (Math.abs(dy) === 1 && getPieceTurn(destPiece) === "B")) //check for diagonal logic
+        );
+      } else {
+        if (
+          src.x === 1 &&
+          dx === 2 &&
+          isPathClear(board, src, dest) &&
+          destPiece === "."
+        )
+          return true;
+        return (
+          dx === 1 &&
+          ((dy === 0 && destPiece === ".") ||
+            (Math.abs(dy) === 1 && getPieceTurn(destPiece) === "W"))
+        );
+      }
     }
     case "r": {
       return (dx === 0 || dy === 0) && isPathClear(board, src, dest);
