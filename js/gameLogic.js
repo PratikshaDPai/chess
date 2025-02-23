@@ -102,8 +102,10 @@ export function isValidMove(board, src, dest, turn) {
     return false;
   }
   if (!isRulesetSatisfied(board, { src, dest }, turn)) return false;
+  const newBoard = makeMove(board, { src, dest });
+  if (isCheck(newBoard, turn)) return false;
 
-  return true; //todo add check logic
+  return true;
 }
 
 /**
