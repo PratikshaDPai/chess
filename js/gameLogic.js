@@ -181,7 +181,7 @@ function isRulesetSatisfied(board, { src, dest }, turn) {
  * @param {Move} move
  * @returns {Board}
  */
-function makeMove(board, { src, dest }) {
+export function makeMove(board, { src, dest }) {
   const newBoard = board.map((row) => [...row]); //clone 2d array in JS
   newBoard[dest.x][dest.y] = newBoard[src.x][src.y]; // Move piece
   newBoard[src.x][src.y] = "."; // Empty old square
