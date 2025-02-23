@@ -101,6 +101,21 @@ export function isValidMove(board, src, dest, turn) {
   if (getPieceTurn(srcPiece) !== turn || getPieceTurn(destPiece) === turn) {
     return false;
   }
+  if (!isRulesetSatisfied(board, { src, dest }, turn)) return false;
+
+  return true; //todo add check logic
+}
+
+/**
+ *
+ * @param {Board} board
+ * @param {Move} move
+ * @param {Turn} turn
+ * @returns
+ */
+function isRulesetSatisfied(board, { src, dest }, turn) {
+  const srcPiece = board[src.x][src.y];
+  const destPiece = board[dest.x][dest.y];
   const dx = dest.x - src.x;
   const dy = dest.y - src.y;
   switch (srcPiece.toLowerCase()) {
@@ -155,7 +170,6 @@ export function isValidMove(board, src, dest, turn) {
       );
     }
   }
-
   return false;
 }
 
