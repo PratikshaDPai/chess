@@ -163,6 +163,15 @@ function isRulesetSatisfied(board, { src, dest }, turn) {
       );
     }
     case "k": {
+      //Cannot move within Math.abs(dx)<=1&& Math.abs(dy)<=1 of another king
+      const opponentKing = getOpponentTurn(turn) === "B" ? "k" : "K";
+      const opponentKingCoordinate = getPieceCoordinate(board, opponentKing);
+      if (
+        Math.abs(opponentKingCoordinate.x - dest.x) <= 1 &&
+        Math.abs(opponentKingCoordinate.y - dest.y) <= 1
+      ) {
+        return false;
+      }
       return Math.abs(dx) <= 1 && Math.abs(dy) <= 1;
     }
     case "n": {
