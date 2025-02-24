@@ -3,6 +3,7 @@ import {
   getOpponentTurn,
   getPieceCoordinate,
   getPieceTurn,
+  isCheckmate,
   isValidMove,
 } from "./gameLogic";
 
@@ -357,6 +358,27 @@ describe("isValidMove() tests", () => {
     ).toBe(false);
   });
 
+  test("Move Bishop to the next diagonal, return false", () => {
+    const board = [
+      [".", ".", ".", ".", "k", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", "B", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", "K", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+    ];
+    expect(
+      isValidMove(
+        board,
+        getPieceCoordinate(board, "B"),
+        getPieceCoordinate(board, "k"),
+        "W"
+      )
+    ).toBe(false);
+  });
+
   test("Move Rook vertically, return true", () => {
     const board = [
       [".", ".", ".", ".", ".", ".", ".", "."],
@@ -583,5 +605,22 @@ describe("isValidMove() tests", () => {
     expect(
       isValidMove(board, getPieceCoordinate(board, "K"), { x: 3, y: 4 }, "W")
     ).toBe(false);
+  });
+});
+
+describe("isCheckmate() tests", () => {
+  test("temp prod bug :(", () => {
+    const board = [
+      ["r", "n", ".", ".", "k", ".", ".", "r"],
+      ["p", ".", ".", ".", ".", "p", ".", "p"],
+      [".", ".", "p", ".", ".", "p", ".", "."],
+      [".", ".", ".", ".", "q", ".", ".", "."],
+      [".", "b", "B", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      ["P", "P", "P", "P", "K", "P", "P", "P"],
+      ["R", ".", "B", ".", ".", "R", ".", "."],
+    ];
+    expect(isCheckmate(board, "B")).toBe(false);
+    expect(isCheckmate(board, "W")).toBe(false);
   });
 });

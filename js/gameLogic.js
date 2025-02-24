@@ -42,6 +42,9 @@ function isCheck(board, turn) {
   const opponentTurn = getOpponentTurn(turn);
   const king = turn === "B" ? "k" : "K";
   const kingCoordinate = getPieceCoordinate(board, king);
+  if (typeof kingCoordinate === "undefined") {
+    return false;
+  }
   //Step 2: If not king, check if any opponent(non-king) piece has isValidMove() to king coordinate
   //Iterate over board, find pieces opp of turn, check validmove(piece coordinate, king coordinate,board)
   for (let x = 0; x < board.length; x++) {
