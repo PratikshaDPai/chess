@@ -111,6 +111,35 @@ export function isValidMove(board, src, dest, turn) {
 /**
  *
  * @param {Board} board
+ * @param {Turn} turn
+ * @returns {boolean}
+ */
+export function isCheckmate(board, turn) {
+  console.log(turn, board, isCheck(board, turn));
+  if (!isCheck(board, turn)) return false;
+
+  for (let x = 0; x < board.length; x++) {
+    for (let y = 0; y < board.length; y++) {
+      if (board[x][y] === ".") continue;
+      const piece = board[x][y];
+      if (getPieceTurn(piece) === turn) {
+        //check for ANY valid moves from current turn pieces
+        for (let destx = 0; destx < board.length; destx++) {
+          for (let desty = 0; desty < board.length; desty++) {
+            if (isValidMove(board, { x, y }, { x: destx, y: desty }, turn)) {
+              return false;
+            }
+          }
+        }
+      }
+    }
+  }
+  return true;
+}
+
+/**
+ *
+ * @param {Board} board
  * @param {Move} move
  * @param {Turn} turn
  * @returns

@@ -1,4 +1,9 @@
-import { getOpponentTurn, isValidMove, makeMove } from "./gameLogic.js";
+import {
+  getOpponentTurn,
+  isCheckmate,
+  isValidMove,
+  makeMove,
+} from "./gameLogic.js";
 
 const board = document.querySelector(".board");
 let boardMatrix = [
@@ -24,10 +29,16 @@ board.addEventListener("click", function (event) {
     dest = { x: parseInt(square.dataset.row), y: parseInt(square.dataset.col) };
     if (isValidMove(boardMatrix, src, dest, turn)) {
       boardMatrix = makeMove(boardMatrix, { src, dest });
+      updateBoard();
+      if (isCheckmate(boardMatrix, getOpponentTurn(turn))) {
+        alert(`Game Over! ${turn} wins!`);
+      }
+      console.log("isCheckMate() ran", turn);
       turn = getOpponentTurn(turn);
+      document.querySelector("body").style.backgroundColor =
+        turn === "W" ? "white" : "black";
       src = undefined;
       dest = undefined;
-      updateBoard();
     } else {
       src = undefined;
     }
