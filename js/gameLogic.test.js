@@ -626,11 +626,14 @@ describe("isCheckmate() tests", () => {
   });
 });
 
-describe("algebraicNotation tests", () => {
+describe("algebraicNotation() tests", () => {
   test("Test invalid input, return undefined", () => {
     expect(algebraicNotation({ x: -1, y: -1 }, { x: 4, y: 4 })).toBeUndefined;
   });
   test("Test {4,4} to {4,5} returns e4  f4", () => {
     expect(algebraicNotation({ x: 4, y: 4 }, { x: 4, y: 5 })).toBe("e4    f4");
+  });
+  test("Test {4,4} to {4,4} returns e4  e4 (same dest as src)", () => {
+    expect(algebraicNotation({ x: 4, y: 4 }, { x: 4, y: 4 })).toBe("e4    e4");
   });
 });
