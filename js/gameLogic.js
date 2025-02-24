@@ -42,6 +42,36 @@ function isCheck(board, turn) {
 }
 
 /**
+ *Function to generate algebraic notation of moves from board position
+ *Assumes a valid chess board as input
+ *Return undefined if invalid src and dest coordinates.
+ * @param {Coordinate} src
+ * @param {Coordinate} dest
+ * @returns {String|undefined}
+ */
+export function algebraicNotation(src, dest) {
+  const rank = { 0: 8, 1: 7, 2: 6, 3: 5, 4: 4, 5: 3, 6: 2, 7: 1 };
+  const file = {
+    0: "a",
+    1: "b",
+    2: "c",
+    3: "d",
+    4: "e",
+    5: "f",
+    6: "g",
+    7: "h",
+  };
+  if (
+    (src.x < 0 && src.x > 7) ||
+    (src.y < 0 && src.y > 7) ||
+    dest.x < 0 ||
+    dest.y > 7
+  )
+    return undefined;
+  return `${file[src.y]}${rank[src.x]}    ${file[dest.y]}${rank[dest.x]}`;
+}
+
+/**
  * @param {Turn} turn
  * @returns {Turn}
  */

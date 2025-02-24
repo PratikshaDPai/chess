@@ -3,6 +3,7 @@ import {
   isCheckmate,
   isValidMove,
   makeMove,
+  algebraicNotation,
 } from "./gameLogic.js";
 
 const board = document.querySelector(".board");
@@ -27,7 +28,7 @@ board.addEventListener("click", function (event) {
     src = { x: parseInt(square.dataset.row), y: parseInt(square.dataset.col) };
   } else {
     dest = { x: parseInt(square.dataset.row), y: parseInt(square.dataset.col) };
-    algebraicNotation(src, dest);
+    console.log(algebraicNotation(src, dest));
     if (isValidMove(boardMatrix, src, dest, turn)) {
       boardMatrix = makeMove(boardMatrix, { src, dest });
       updateBoard();
@@ -44,27 +45,6 @@ board.addEventListener("click", function (event) {
     }
   }
 });
-
-/**
- *
- * @param {Coordinate} src
- * @param {Coordinate} dest
- * @returns {String}
- */
-function algebraicNotation(src, dest) {
-  const rank = { 0: 8, 1: 7, 2: 6, 3: 5, 4: 4, 5: 3, 6: 2, 7: 1 };
-  const file = {
-    0: "a",
-    1: "b",
-    2: "c",
-    3: "d",
-    4: "e",
-    5: "f",
-    6: "g",
-    7: "h",
-  };
-  console.log(`${file[src.y]}${rank[src.x]}    ${file[dest.y]}${rank[dest.x]}`);
-}
 
 function updateBoard() {
   for (const square of board.children) {

@@ -5,6 +5,7 @@ import {
   getPieceTurn,
   isCheckmate,
   isValidMove,
+  algebraicNotation,
 } from "./gameLogic";
 
 describe("getOpponentTurn() Tests", () => {
@@ -622,5 +623,14 @@ describe("isCheckmate() tests", () => {
     ];
     expect(isCheckmate(board, "B")).toBe(false);
     expect(isCheckmate(board, "W")).toBe(false);
+  });
+});
+
+describe("algebraicNotation tests", () => {
+  test("Test invalid input, return undefined", () => {
+    expect(algebraicNotation({ x: -1, y: -1 }, { x: 4, y: 4 })).toBeUndefined;
+  });
+  test("Test {4,4} to {4,5} returns e4  f4", () => {
+    expect(algebraicNotation({ x: 4, y: 4 }, { x: 4, y: 5 })).toBe("e4    f4");
   });
 });
