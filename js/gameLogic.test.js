@@ -281,6 +281,40 @@ describe("isValidMove() tests", () => {
     expect(isValidMove(board, src, dest, "W")).toBe(true);
   });
 
+  test("Move a white Pawn such that dx = -2 and dy = 7", () => {
+    const board = [
+      [".", ".", ".", ".", "k", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      ["P", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", "K", ".", ".", "."],
+    ];
+    const src = getPieceCoordinate(board, "P");
+    expect(isValidMove(board, src, { x: src.x - 2, y: src.y + 7 }, "W")).toBe(
+      false
+    );
+  });
+
+  test("Move a black Pawn such that dx = 2 and dy = 7", () => {
+    const board = [
+      [".", ".", ".", ".", "k", ".", ".", "."],
+      ["p", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", ".", ".", ".", "."],
+      [".", ".", ".", ".", "K", ".", ".", "."],
+    ];
+    const src = getPieceCoordinate(board, "p");
+    expect(isValidMove(board, src, { x: src.x + 2, y: src.y + 7 }, "B")).toBe(
+      false
+    );
+  });
+
   test("Move Rook Diagonally, return false", () => {
     const board = [
       [".", ".", ".", ".", ".", ".", ".", "."],

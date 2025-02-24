@@ -115,7 +115,6 @@ export function isValidMove(board, src, dest, turn) {
  * @returns {boolean}
  */
 export function isCheckmate(board, turn) {
-  console.log(turn, board, isCheck(board, turn));
   if (!isCheck(board, turn)) return false;
 
   for (let x = 0; x < board.length; x++) {
@@ -155,6 +154,7 @@ function isRulesetSatisfied(board, { src, dest }, turn) {
         if (
           src.x === 6 &&
           dx === -2 &&
+          dy === 0 &&
           isPathClear(board, src, dest) &&
           destPiece === "."
         )
@@ -168,6 +168,7 @@ function isRulesetSatisfied(board, { src, dest }, turn) {
         if (
           src.x === 1 &&
           dx === 2 &&
+          dy === 0 &&
           isPathClear(board, src, dest) &&
           destPiece === "."
         )

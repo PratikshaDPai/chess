@@ -33,7 +33,6 @@ board.addEventListener("click", function (event) {
       if (isCheckmate(boardMatrix, getOpponentTurn(turn))) {
         alert(`Game Over! ${turn} wins!`);
       }
-      console.log("isCheckMate() ran", turn);
       turn = getOpponentTurn(turn);
       document.querySelector("body").style.backgroundColor =
         turn === "W" ? "white" : "black";
