@@ -30,7 +30,7 @@ function isCheck(board, turn) {
       };
       if (
         nonKingPieces[opponentTurn].includes(piece) &&
-        isValidMove(board, { x, y }, kingCoordinate, opponentTurn)
+        canSrcThreatenDest(board, { x, y }, kingCoordinate, opponentTurn)
       ) {
         //check if x,y to kingCoordinates is a validMove
         return true;
@@ -137,6 +137,26 @@ export function isCheckmate(board, turn) {
       }
     }
   }
+  return true;
+}
+
+/**
+ * @param {Board} board
+ * @param {Coordinate} src
+ * @param {Coordinate} dest
+ * @param {Turn} turn
+ */
+export function canSrcThreatenDest(board, src, dest, turn) {
+  const srcPiece = board[src.x][src.y];
+  const destPiece = board[dest.x][dest.y];
+  //check if piece color matches turn
+  //'B' turn=lowercase pieces, 'W' turn= uppercase
+  //also test if dest square occupied by same color piece
+  if (getPieceTurn(srcPiece) !== turn || getPieceTurn(destPiece) === turn) {
+    return false;
+  }
+  if (!isRulesetSatisfied(board, { src, dest }, turn)) return false;
+
   return true;
 }
 
