@@ -22,18 +22,18 @@ let dest;
 let turn = "W";
 
 board.addEventListener("click", function (event) {
-  const square = event.target;
+  const square = event.currentTarget;
   if (!square.classList.contains("square")) return;
   if (!src) {
     src = { x: parseInt(square.dataset.row), y: parseInt(square.dataset.col) };
   } else {
     dest = { x: parseInt(square.dataset.row), y: parseInt(square.dataset.col) };
-    console.log(algebraicNotation(src, dest));
     if (isValidMove(boardMatrix, src, dest, turn)) {
       boardMatrix = makeMove(boardMatrix, { src, dest });
+      console.log(algebraicNotation(src, dest));
       updateBoard();
       if (isCheckmate(boardMatrix, getOpponentTurn(turn))) {
-        alert(`Game Over! ${turn} wins!`);
+        console.log(`Game Over! ${turn} wins!`);
       }
       turn = getOpponentTurn(turn);
       document.querySelector("body").style.backgroundColor =
@@ -54,20 +54,25 @@ function updateBoard() {
     //todo: change to images
     const emojis = {
       ".": "",
-      P: "♙",
-      B: "♗",
-      R: "♖",
-      N: "♘",
-      K: "♔",
-      Q: "♕",
-      p: "♟️",
-      b: "♝",
-      r: "♜",
-      n: "♞",
-      k: "♚",
-      q: "♛",
+      P: "./css/assets/white-pawn.svg",
+      B: "./css/assets/white-bishop.svg",
+      R: "./css/assets/white-rook.svg",
+      N: "./css/assets/white-knight.svg",
+      K: "./css/assets/white-king.svg",
+      Q: "./css/assets/white-queen.svg",
+      p: "./css/assets/black-pawn.svg",
+      b: "./css/assets/black-bishop.svg",
+      r: "./css/assets/black-rook.svg",
+      n: "./css/assets/black-knight.svg",
+      k: "./css/assets/black-king.svg",
+      q: "./css/assets/black-queen.svg",
     };
-    square.innerText = emojis[piece];
+    square.innerText = "";
+    if (piece !== ".") {
+      let image = new Image(30, 30);
+      image.src = emojis[piece];
+      square.appendChild(image);
+    }
   }
 }
 
