@@ -1,4 +1,33 @@
 /**
+ * @typedef {BoardSquare[][]} Board
+ */
+
+/**
+ * @typedef { 'R' | 'N' | "B" | "Q" | "K" | "P" | 'r' | 'n' | 'b' | 'q' | 'k' | 'p' } Piece
+ */
+
+/**
+ * @typedef {Piece|'.'} BoardSquare
+ */
+
+/**
+ * @typedef {'B'|'W'} Turn
+ */
+
+/**
+ *
+ * @typedef Coordinate
+ * @property {number} x
+ * @property {number} y
+ */
+
+/**
+ * @typedef Move
+ * @property {Coordinate} src
+ * @property {Coordinate} dest
+ */
+
+/**
  * Board level function. Needs access to
  * - Find king of current turn, check for
  * - For each opponent piece, is king’s square a valid move()?
@@ -58,13 +87,9 @@ export function algebraicNotation(src, dest) {
     6: "g",
     7: "h",
   };
-  if (
-    (src.x < 0 && src.x > 7) ||
-    (src.y < 0 && src.y > 7) ||
-    dest.x < 0 ||
-    dest.y > 7
-  )
+  if (isCoordinateOutOfBounds(src) || isCoordinateOutOfBounds(dest)) {
     return undefined;
+  }
   return `${file[src.y]}${rank[src.x]}    ${file[dest.y]}${rank[dest.x]}`;
 }
 
@@ -243,13 +268,9 @@ function isRulesetSatisfied(board, { src, dest }, turn) {
  * @returns {Board}
  */
 export function makeMove(board, { src, dest }) {
-  if (
-    (src.x < 0 && src.x > 7) ||
-    (src.y < 0 && src.y > 7) ||
-    dest.x < 0 ||
-    dest.y > 7
-  )
+  if (isCoordinateOutOfBounds(src) || isCoordinateOutOfBounds(dest)) {
     return undefined; //make sure piece can't move off board
+  }
   const newBoard = board.map((row) => [...row]); //clone 2d array in JS
   newBoard[dest.x][dest.y] = newBoard[src.x][src.y]; // Move piece
   newBoard[src.x][src.y] = "."; // Empty old square
@@ -302,4 +323,14 @@ export function getPieceCoordinate(board, piece) {
     }
   }
   return undefined;
+}
+
+/**
+ * @param {Coordinate} coordinate
+ * @returns {boolean}
+ */
+export function isCoordinateOutOfBounds(coordinate) {
+  return (
+    coordinate.x < 0 || coordinate.x > 7 || coordinate.y < 0 || coordinate.y > 7
+  );
 }
