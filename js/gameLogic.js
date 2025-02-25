@@ -219,12 +219,20 @@ function isRulesetSatisfied(board, { src, dest }, turn) {
 }
 
 /**
- *
+ * This function makes a move on a chess board
+ * If invalid s
  * @param {Board} board
  * @param {Move} move
  * @returns {Board}
  */
 export function makeMove(board, { src, dest }) {
+  if (
+    (src.x < 0 && src.x > 7) ||
+    (src.y < 0 && src.y > 7) ||
+    dest.x < 0 ||
+    dest.y > 7
+  )
+    return undefined; //make sure piece can't move off board
   const newBoard = board.map((row) => [...row]); //clone 2d array in JS
   newBoard[dest.x][dest.y] = newBoard[src.x][src.y]; // Move piece
   newBoard[src.x][src.y] = "."; // Empty old square

@@ -6,6 +6,7 @@ import {
   isCheckmate,
   isValidMove,
   algebraicNotation,
+  makeMove,
 } from "./gameLogic";
 
 describe("getOpponentTurn() Tests", () => {
@@ -635,5 +636,49 @@ describe("algebraicNotation() tests", () => {
   });
   test("Test {4,4} to {4,4} returns e4  e4 (same dest as src)", () => {
     expect(algebraicNotation({ x: 4, y: 4 }, { x: 4, y: 4 })).toBe("e4    e4");
+  });
+});
+
+describe("makeMove() tests", () => {
+  const board = [
+    ["r", "n", ".", ".", "k", ".", ".", "r"],
+    ["p", ".", ".", ".", ".", "p", ".", "p"],
+    [".", ".", "p", ".", ".", "p", ".", "."],
+    [".", ".", ".", ".", "q", ".", ".", "."],
+    [".", "b", "B", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    ["P", "P", "P", "P", "K", "P", "P", "P"],
+    ["R", ".", "B", ".", ".", "R", ".", "."],
+  ];
+
+  const updatedBoard = [
+    ["r", "n", ".", ".", "k", ".", ".", "r"],
+    ["p", ".", ".", ".", ".", "p", ".", "p"],
+    [".", ".", "p", ".", ".", "p", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", "b", "B", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    ["P", "P", "P", "P", "q", "P", "P", "P"],
+    ["R", ".", "B", ".", ".", "R", ".", "."],
+  ];
+  test("Test invalid src, expect error", () => {
+    expect(makeMove(board, { src: { x: 4, y: 5 }, dest: { x: 4, y: 4 } }))
+      .toBeUndefined;
+  });
+  test("Test invalid dest, expect error", () => {
+    expect(
+      makeMove(board, {
+        src: getPieceCoordinate(board, "P"),
+        dest: { x: 4, y: 5 },
+      })
+    ).toBeUndefined;
+  });
+  test("Move q to K, return updated board", () => {
+    expect(
+      makeMove(board, {
+        src: getPieceCoordinate(board, "q"),
+        dest: getPieceCoordinate(board, "K"),
+      })
+    ).toStrictEqual(updatedBoard);
   });
 });
