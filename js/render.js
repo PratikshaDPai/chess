@@ -48,8 +48,10 @@ board.addEventListener("click", function (event) {
     if (isValidMove(boardMatrix, src, dest, turn)) {
       boardMatrix = makeMove(boardMatrix, { src, dest });
       if (turn === "B") {
+        bmoveSound.load();
         bmoveSound.play();
       } else {
+        wmoveSound.load();
         wmoveSound.play();
       }
       const notation = document.createElement("p");
