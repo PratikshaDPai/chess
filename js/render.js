@@ -4,6 +4,7 @@ import {
   isValidMove,
   makeMove,
   algebraicNotation,
+  getValidCoordinates,
 } from "./gameLogic.js";
 
 const bmoveSound = new Audio("./css/assets/B-move.mp3");
@@ -28,8 +29,19 @@ board.addEventListener("click", function (event) {
   if (!square.classList.contains("square")) return;
   if (!src) {
     src = { x: parseInt(square.dataset.row), y: parseInt(square.dataset.col) };
+    getValidCoordinates(boardMatrix, src, turn).forEach(({ x, y }) => {
+      const targetSquare = document.querySelector(
+        `[data-row="${x}"][data-col="${y}"]`
+      );
+      if (targetSquare) {
+        targetSquare.classList.add("valid-move");
+      }
+    });
   } else {
     dest = { x: parseInt(square.dataset.row), y: parseInt(square.dataset.col) };
+    for (const child of board.children) {
+      child.classList.remove("valid-move");
+    }
     if (isValidMove(boardMatrix, src, dest, turn)) {
       boardMatrix = makeMove(boardMatrix, { src, dest });
       if (turn === "B") {

@@ -97,13 +97,13 @@ export function algebraicNotation(src, dest) {
  * Used to get the valid moves of a piece for UX
  * @param {Board} board
  * @param {Coordinate} src
+ * @param {Turn} turn
  * @returns {Coordinate[]}
  */
-function getValidCoordinates(board, src) {
+export function getValidCoordinates(board, src, turn) {
   const piece = board[src.x][src.y];
-  if (piece === ".") return [];
+  if (piece === "." || getPieceTurn(piece) !== turn) return [];
 
-  const turn = getPieceTurn(piece);
   const validCoordinates = [];
   for (let x = 0; x < board.length; x++) {
     for (let y = 0; y < board.length; y++) {
