@@ -56,7 +56,7 @@ function updateTurn(newTurn) {
   turn = newTurn;
   playerInfo.innerText =
     turn === "W" ? "Current Player: White" : "Current Player: Black";
-  body.style.backgroundColor = turn === "W" ? "white" : "black";
+  body.style.backgroundColor = turn === "W" ? "#e3bd94" : "#633b21";
 }
 
 function updateWinner(newWinner) {
