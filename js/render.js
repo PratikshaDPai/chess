@@ -41,7 +41,7 @@ function createNewGame() {
   ];
   src = undefined;
   dest = undefined;
-  turn = "W";
+  updateTurn("W");
 }
 
 function updateTurn(newTurn) {
@@ -138,4 +138,5 @@ function createBoard() {
   updateBoard();
 }
 
+createNewGame();
 createBoard();
