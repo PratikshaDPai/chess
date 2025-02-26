@@ -6,6 +6,8 @@ import {
   algebraicNotation,
 } from "./gameLogic.js";
 
+const bmoveSound = new Audio("./css/assets/B-move.mp3");
+const wmoveSound = new Audio("./css/assets/W-move.mp3");
 const board = document.querySelector(".board");
 let boardMatrix = [
   ["r", "n", "b", "q", "k", "b", "n", "r"],
@@ -22,7 +24,7 @@ let dest;
 let turn = "W";
 
 board.addEventListener("click", function (event) {
-  const square = event.currentTarget;
+  const square = event.target.closest(".square");
   if (!square.classList.contains("square")) return;
   if (!src) {
     src = { x: parseInt(square.dataset.row), y: parseInt(square.dataset.col) };
@@ -30,6 +32,11 @@ board.addEventListener("click", function (event) {
     dest = { x: parseInt(square.dataset.row), y: parseInt(square.dataset.col) };
     if (isValidMove(boardMatrix, src, dest, turn)) {
       boardMatrix = makeMove(boardMatrix, { src, dest });
+      if (turn === "B") {
+        bmoveSound.play();
+      } else {
+        wmoveSound.play();
+      }
       console.log(algebraicNotation(src, dest));
       updateBoard();
       if (isCheckmate(boardMatrix, getOpponentTurn(turn))) {
