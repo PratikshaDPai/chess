@@ -10,6 +10,9 @@ import {
 const bmoveSound = new Audio("./css/assets/B-move.mp3");
 const wmoveSound = new Audio("./css/assets/W-move.mp3");
 const board = document.querySelector(".board");
+const algebraicDisplayElement = document.querySelector(".algebraic-notation");
+const playerInfo = document.querySelector(".player-info");
+
 let boardMatrix = [
   ["r", "n", "b", "q", "k", "b", "n", "r"],
   ["p", "p", "p", "p", "p", "p", "p", "p"],
@@ -49,12 +52,16 @@ board.addEventListener("click", function (event) {
       } else {
         wmoveSound.play();
       }
-      console.log(algebraicNotation(src, dest));
+      const notation = document.createElement("p");
+      notation.innerText = `${turn}: ${algebraicNotation(src, dest)}`;
+      algebraicDisplayElement.appendChild(notation);
       updateBoard();
       if (isCheckmate(boardMatrix, getOpponentTurn(turn))) {
         console.log(`Game Over! ${turn} wins!`);
       }
       turn = getOpponentTurn(turn);
+      playerInfo.innerText =
+        turn === "W" ? "Current Player: White" : "Current Player: Black";
       document.querySelector("body").style.backgroundColor =
         turn === "W" ? "white" : "black";
       src = undefined;
