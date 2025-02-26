@@ -16,6 +16,10 @@ const playerInfo = document.querySelector(".player-info");
 const newGameButton = document.querySelector(".new-game-btn");
 const gameStatus = document.querySelector("#game-status");
 const resignButton = document.querySelector(".resign-btn");
+const drawButton = document.querySelector(".draw-btn");
+const drawModal = document.querySelector(".draw-modal");
+const closeIcon = document.querySelector(".close");
+const drawIcon = document.querySelector(".draw");
 
 let boardMatrix = [
   ["r", "n", "b", "q", "k", "b", "n", "r"],
@@ -70,6 +74,18 @@ resignButton.addEventListener("click", function () {
 
 newGameButton.addEventListener("click", function (event) {
   createNewGame();
+});
+
+drawButton.addEventListener("click", (event) => {
+  drawModal.style.display = "block";
+});
+
+closeIcon.addEventListener("click", function (event) {
+  drawModal.style.display = "none";
+});
+
+drawIcon.addEventListener("click", function (event) {
+  drawModal.style.display = "none"; //todo: add draw logic
 });
 
 board.addEventListener("click", function (event) {
@@ -127,12 +143,12 @@ function updateBoard() {
     //todo: change to images
     const emojis = {
       ".": "",
-      P: "./css/assets/white-pawn.svg",
-      B: "./css/assets/white-bishop.svg",
-      R: "./css/assets/white-rook.svg",
-      N: "./css/assets/white-knight.svg",
-      K: "./css/assets/white-king.svg",
-      Q: "./css/assets/white-queen.svg",
+      P: "./css/assets/white-pawn-filled.svg",
+      B: "./css/assets/white-bishop-filled.svg",
+      R: "./css/assets/white-rook-filled.svg",
+      N: "./css/assets/white-knight-filled.svg",
+      K: "./css/assets/white-king-filled.svg",
+      Q: "./css/assets/white-queen-filled.svg",
       p: "./css/assets/black-pawn.svg",
       b: "./css/assets/black-bishop.svg",
       r: "./css/assets/black-rook.svg",
