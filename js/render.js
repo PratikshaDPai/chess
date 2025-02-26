@@ -14,6 +14,8 @@ const body = document.querySelector("body");
 const algebraicDisplayElement = document.querySelector(".algebraic-notation");
 const playerInfo = document.querySelector(".player-info");
 const newGameButton = document.querySelector(".new-game-btn");
+const gameStatus = document.querySelector("#game-status");
+const resignButton = document.querySelector(".resign-btn");
 
 let boardMatrix = [
   ["r", "n", "b", "q", "k", "b", "n", "r"],
@@ -28,6 +30,7 @@ let boardMatrix = [
 let src;
 let dest;
 let turn = "W";
+let winner;
 
 function createNewGame() {
   boardMatrix = [
@@ -42,9 +45,11 @@ function createNewGame() {
   ];
   src = undefined;
   dest = undefined;
+  winner = undefined;
   updateTurn("W");
   updateBoard();
   algebraicDisplayElement.innerText = "";
+  gameStatus.innerText = "Game in Progress";
 }
 
 function updateTurn(newTurn) {
@@ -54,11 +59,24 @@ function updateTurn(newTurn) {
   body.style.backgroundColor = turn === "W" ? "white" : "black";
 }
 
+function updateWinner(newWinner) {
+  winner = newWinner;
+  gameStatus.innerText = winner === "W" ? "White wins!" : "Black wins!";
+}
+
+resignButton.addEventListener("click", function () {
+  updateWinner(getOpponentTurn(turn));
+});
+
 newGameButton.addEventListener("click", function (event) {
   createNewGame();
 });
 
 board.addEventListener("click", function (event) {
+  if (winner) {
+    return;
+  }
+
   const square = event.target.closest(".square");
   if (!square.classList.contains("square")) return;
   if (!src) {
@@ -90,7 +108,7 @@ board.addEventListener("click", function (event) {
       algebraicDisplayElement.appendChild(notation);
       updateBoard();
       if (isCheckmate(boardMatrix, getOpponentTurn(turn))) {
-        console.log(`Game Over! ${turn} wins!`);
+        updateWinner(turn);
       }
       updateTurn(getOpponentTurn(turn));
       src = undefined;
