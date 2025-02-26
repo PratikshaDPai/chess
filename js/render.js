@@ -13,6 +13,7 @@ const board = document.querySelector(".board");
 const body = document.querySelector("body");
 const algebraicDisplayElement = document.querySelector(".algebraic-notation");
 const playerInfo = document.querySelector(".player-info");
+const newGameButton = document.querySelector(".new-game-btn");
 
 let boardMatrix = [
   ["r", "n", "b", "q", "k", "b", "n", "r"],
@@ -42,6 +43,8 @@ function createNewGame() {
   src = undefined;
   dest = undefined;
   updateTurn("W");
+  updateBoard();
+  algebraicDisplayElement.innerText = "";
 }
 
 function updateTurn(newTurn) {
@@ -50,6 +53,10 @@ function updateTurn(newTurn) {
     turn === "W" ? "Current Player: White" : "Current Player: Black";
   body.style.backgroundColor = turn === "W" ? "white" : "black";
 }
+
+newGameButton.addEventListener("click", function (event) {
+  createNewGame();
+});
 
 board.addEventListener("click", function (event) {
   const square = event.target.closest(".square");
@@ -138,5 +145,5 @@ function createBoard() {
   updateBoard();
 }
 
-createNewGame();
 createBoard();
+createNewGame();
