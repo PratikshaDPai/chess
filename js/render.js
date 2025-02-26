@@ -142,7 +142,7 @@ function updateBoard() {
     };
     square.innerText = "";
     if (piece !== ".") {
-      let image = new Image(30, 30);
+      let image = new Image(35, 35);
       image.src = emojis[piece];
       square.appendChild(image);
     }
