@@ -10,6 +10,7 @@ import {
 const bmoveSound = new Audio("./css/assets/B-move.mp3");
 const wmoveSound = new Audio("./css/assets/W-move.mp3");
 const board = document.querySelector(".board");
+const body = document.querySelector("body");
 const algebraicDisplayElement = document.querySelector(".algebraic-notation");
 const playerInfo = document.querySelector(".player-info");
 
@@ -26,6 +27,29 @@ let boardMatrix = [
 let src;
 let dest;
 let turn = "W";
+
+function createNewGame() {
+  boardMatrix = [
+    ["r", "n", "b", "q", "k", "b", "n", "r"],
+    ["p", "p", "p", "p", "p", "p", "p", "p"],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    [".", ".", ".", ".", ".", ".", ".", "."],
+    ["P", "P", "P", "P", "P", "P", "P", "P"],
+    ["R", "N", "B", "Q", "K", "B", "N", "R"],
+  ];
+  src = undefined;
+  dest = undefined;
+  turn = "W";
+}
+
+function updateTurn(newTurn) {
+  turn = newTurn;
+  playerInfo.innerText =
+    turn === "W" ? "Current Player: White" : "Current Player: Black";
+  body.style.backgroundColor = turn === "W" ? "white" : "black";
+}
 
 board.addEventListener("click", function (event) {
   const square = event.target.closest(".square");
@@ -61,11 +85,7 @@ board.addEventListener("click", function (event) {
       if (isCheckmate(boardMatrix, getOpponentTurn(turn))) {
         console.log(`Game Over! ${turn} wins!`);
       }
-      turn = getOpponentTurn(turn);
-      playerInfo.innerText =
-        turn === "W" ? "Current Player: White" : "Current Player: Black";
-      document.querySelector("body").style.backgroundColor =
-        turn === "W" ? "white" : "black";
+      updateTurn(getOpponentTurn(turn));
       src = undefined;
       dest = undefined;
     } else {
