@@ -65,7 +65,12 @@ function updateTurn(newTurn) {
 
 function updateWinner(newWinner) {
   winner = newWinner;
-  gameStatus.innerText = winner === "W" ? "White wins!" : "Black wins!";
+  const winnerText = {
+    draw: "Draw",
+    W: "White wins!",
+    B: "Black wins!",
+  };
+  gameStatus.innerText = winnerText[winner];
 }
 
 resignButton.addEventListener("click", function () {
@@ -85,6 +90,7 @@ closeIcon.addEventListener("click", function (event) {
 });
 
 drawIcon.addEventListener("click", function (event) {
+  updateWinner("draw");
   drawModal.style.display = "none"; //todo: add draw logic
 });
 
