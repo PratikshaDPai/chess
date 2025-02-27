@@ -9,6 +9,7 @@ import {
 
 const bmoveSound = new Audio("./css/assets/B-move.mp3");
 const wmoveSound = new Audio("./css/assets/W-move.mp3");
+const winSound = new Audio("./css/assets/violin-win.mp3");
 const board = document.querySelector(".board");
 const body = document.querySelector("body");
 const algebraicDisplayElement = document.querySelector(".algebraic-notation");
@@ -71,6 +72,9 @@ function updateWinner(newWinner) {
     B: "Black wins!",
   };
   gameStatus.innerText = winnerText[winner];
+  winSound.load();
+  winSound.volume = 0.3;
+  winSound.play();
 }
 
 resignButton.addEventListener("click", function () {
