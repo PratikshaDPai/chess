@@ -65,16 +65,19 @@ function updateTurn(newTurn) {
 }
 
 function updateWinner(newWinner) {
-  winner = newWinner;
-  const winnerText = {
-    draw: "Draw",
-    W: "White wins!",
-    B: "Black wins!",
-  };
-  gameStatus.innerText = winnerText[winner];
-  winSound.load();
-  winSound.volume = 0.3;
-  winSound.play();
+  if (winner === undefined) {
+    winner = newWinner;
+    const winnerText = {
+      draw: "Draw",
+      W: "White wins!",
+      B: "Black wins!",
+    };
+    gameStatus.innerText = winnerText[winner];
+    winSound.load();
+    winSound.volume = 0.3;
+    winSound.play();
+  }
+  return;
 }
 
 resignButton.addEventListener("click", function () {
