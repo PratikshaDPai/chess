@@ -82,7 +82,7 @@ newGameButton.addEventListener("click", function (event) {
 });
 
 drawButton.addEventListener("click", (event) => {
-  drawModal.style.display = "block";
+  drawModal.style.display = "flex";
 });
 
 closeIcon.addEventListener("click", function (event) {
