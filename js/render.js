@@ -162,10 +162,25 @@ function updateBoard() {
       k: "./css/assets/black-king.svg",
       q: "./css/assets/black-queen.svg",
     };
+    const alts = {
+      P: "white pawn",
+      B: "white bishop",
+      R: "white rook",
+      N: "white knight",
+      K: "white king",
+      Q: "white queen",
+      p: "black pawn",
+      b: "black bishop",
+      r: "black rook",
+      n: "black knight",
+      k: "black king",
+      q: "black queen",
+    };
     square.innerText = "";
     if (piece !== ".") {
       let image = new Image(35, 35);
       image.src = emojis[piece];
+      image.alt = alts[piece];
       square.appendChild(image);
     }
   }
