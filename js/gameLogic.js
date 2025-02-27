@@ -284,10 +284,10 @@ function isRulesetSatisfied(board, { src, dest }, turn) {
 
 /**
  * This function makes a move on a chess board
- * If invalid s
+ * If invalid return undefined
  * @param {Board} board
  * @param {Move} move
- * @returns {Board}
+ * @returns {Board|undefined}
  */
 export function makeMove(board, { src, dest }) {
   if (isCoordinateOutOfBounds(src) || isCoordinateOutOfBounds(dest)) {
@@ -331,7 +331,6 @@ export function isPathClear(board, src, dest) {
 }
 
 /**
- * Board level function. Needs access to
  * @param {Board} board
  * @param {Piece} piece
  * @returns {Coordinate|undefined}

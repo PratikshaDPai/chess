@@ -91,7 +91,7 @@ closeIcon.addEventListener("click", function (event) {
 
 drawIcon.addEventListener("click", function (event) {
   updateWinner("draw");
-  drawModal.style.display = "none"; //todo: add draw logic
+  drawModal.style.display = "none";
 });
 
 board.addEventListener("click", function (event) {
@@ -146,7 +146,6 @@ function updateBoard() {
     const row = square.dataset.row;
     const col = square.dataset.col;
     const piece = boardMatrix[row][col];
-    //todo: change to images
     const emojis = {
       ".": "",
       P: "./css/assets/white-pawn-filled.svg",
