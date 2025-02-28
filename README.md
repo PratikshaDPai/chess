@@ -41,6 +41,17 @@ This is a simplified version of chess, built over a week. I chose this project b
 | **Perpetual Check** | The opponent is checked indefinitely. |
 
 ---
+## Tech Stack
+1. HTML
+2. CSS
+3. Vanilla JavaScript
+
+## 🖼️ Screenshots
+![New Game](assets/new-game-screenshot.png)
+![Algebraic Notation](assets/algebraic-notation+move-validation.png)
+![Draw Game](assets/draw-modal.png)
+![Black Background](assets/black-background+display-moves.png)
+![End Game](assets/display-win-message.png)
 
 ## ⚙️ How It’s Built
 
