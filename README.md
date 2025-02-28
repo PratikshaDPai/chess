@@ -45,6 +45,7 @@ This is a simplified version of chess, built over a week. I chose this project b
 1. HTML
 2. CSS
 3. Vanilla JavaScript
+4. Jest for unit testing all board level functions 
 
 ## 🖼️ Screenshots
 ![New Game](assets/new-game-screenshot.png)
