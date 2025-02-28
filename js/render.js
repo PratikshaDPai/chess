@@ -7,9 +7,9 @@ import {
   getValidCoordinates,
 } from "./gameLogic.js";
 
-const bmoveSound = new Audio("./css/assets/B-move.mp3");
-const wmoveSound = new Audio("./css/assets/W-move.mp3");
-const winSound = new Audio("./css/assets/violin-win.mp3");
+const bmoveSound = new Audio("./assets/B-move.mp3");
+const wmoveSound = new Audio("./assets/W-move.mp3");
+const winSound = new Audio("./assets/violin-win.mp3");
 const board = document.querySelector(".board");
 const body = document.querySelector("body");
 const algebraicDisplayElement = document.querySelector(".algebraic-notation");
@@ -155,18 +155,18 @@ function updateBoard() {
     const piece = boardMatrix[row][col];
     const emojis = {
       ".": "",
-      P: "./css/assets/white-pawn-filled.svg",
-      B: "./css/assets/white-bishop-filled.svg",
-      R: "./css/assets/white-rook-filled.svg",
-      N: "./css/assets/white-knight-filled.svg",
-      K: "./css/assets/white-king-filled.svg",
-      Q: "./css/assets/white-queen-filled.svg",
-      p: "./css/assets/black-pawn.svg",
-      b: "./css/assets/black-bishop.svg",
-      r: "./css/assets/black-rook.svg",
-      n: "./css/assets/black-knight.svg",
-      k: "./css/assets/black-king.svg",
-      q: "./css/assets/black-queen.svg",
+      P: "./assets/white-pawn-filled.svg",
+      B: "./assets/white-bishop-filled.svg",
+      R: "./assets/white-rook-filled.svg",
+      N: "./assets/white-knight-filled.svg",
+      K: "./assets/white-king-filled.svg",
+      Q: "./assets/white-queen-filled.svg",
+      p: "./assets/black-pawn.svg",
+      b: "./assets/black-bishop.svg",
+      r: "./assets/black-rook.svg",
+      n: "./assets/black-knight.svg",
+      k: "./assets/black-king.svg",
+      q: "./assets/black-queen.svg",
     };
     const alts = {
       P: "white pawn",
