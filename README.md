@@ -59,7 +59,7 @@ This is a simplified version of chess, built over a week. I chose this project b
 - The board is an **8x8 2D array** containing piece objects.
 
 ### ♟️ **Game Actions**
-- **Draw**: Sends message → `"Draw? (✔️ | ❌)"`
+- **Draw**: Sends message → `"Draw? (❌ | ✔️)  "`
 - **Resign**: The opponent wins.
 - **New Game**: Resets the board state.
 
